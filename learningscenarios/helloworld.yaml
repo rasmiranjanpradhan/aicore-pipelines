@@ -3,10 +3,10 @@ kind: WorkflowTemplate
 metadata:
   name: first-pipeline-rrp-ls # Executable ID (max length 64 lowercase-hyphen-separated), please modify this to any value if you are not the only user of your SAP AI Core instance. Example: `first-pipeline-1234`
   annotations:
-    scenarios.ai.sap.com/description: "Introduction to SAP AI Core"
+    scenarios.ai.sap.com/description: "Introduction to SAP AI Core_rrp1"
     scenarios.ai.sap.com/name: "Tutorial_rrp"
-    executables.ai.sap.com/description: "Greets the user"
-    executables.ai.sap.com/name: "Hello Pipeline"
+    executables.ai.sap.com/description: "Greets the user_1"
+    executables.ai.sap.com/name: "Hello Pipeline_rrp"
   labels:
     scenarios.ai.sap.com/id: "learning"
     ai.sap.com/version: "1.0"
