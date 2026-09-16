@@ -4,7 +4,7 @@ metadata:
   name: first-pipeline-rrp-ls     # NEW executable ID (add your initials if sharing)
   annotations:
     scenarios.ai.sap.com/description: "Introduction to SAP AI Core"
-    scenarios.ai.sap.com/name: "Tutorial_RRP2"
+    scenarios.ai.sap.com/name: "Tutorial_RRP3"
     executables.ai.sap.com/description: "Greets, then says goodbye - two steps"
     executables.ai.sap.com/name: "Hello Pipeline Multi-Step"
   labels:
