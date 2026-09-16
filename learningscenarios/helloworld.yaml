@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: WorkflowTemplate
 metadata:
-  name: first-pipeline-multi_RRP     # NEW executable ID (add your initials if sharing)
+  name: first-pipeline-RRP_2     # NEW executable ID (add your initials if sharing)
   annotations:
     scenarios.ai.sap.com/description: "Introduction to SAP AI Core"
-    scenarios.ai.sap.com/name: "Tutorial"
+    scenarios.ai.sap.com/name: "Tutorial_RRP2"
     executables.ai.sap.com/description: "Greets, then says goodbye - two steps"
     executables.ai.sap.com/name: "Hello Pipeline Multi-Step"
   labels:
@@ -17,8 +17,7 @@ spec:
       steps:
         - - name: greet          # step 1
             template: greeter
-        - - name: farewell       # step 2 (runs AFTER 
-step 1)
+        - - name: farewell       # step 2 (runs AFTER step 1)
             template: fareweller
     - name: greeter
       metadata:
