@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: first-pipeline-multi     # NEW executable ID (add your initials if sharing)
+  annotations:
+    scenarios.ai.sap.com/description: "Introduction to SAP AI Core"
+    scenarios.ai.sap.com/name: "Tutorial"
+    executables.ai.sap.com/description: "Greets, then says goodbye - two steps"
+    executables.ai.sap.com/name: "Hello Pipeline Multi-Step"
+  labels:
+    scenarios.ai.sap.com/id: "learning"
+    ai.sap.com/version: "1.0"
+spec:
+  entrypoint: mypipeline
+  templates:
+    - name: mypipeline
+      steps:
+        - - name: greet          # step 1
+            template: greeter
+        - - name: farewell       # step 2 (runs AFTER step 1)
+            template: fareweller
+    - name: greeter
+      metadata:
+        labels:
+          ai.sap.com/resourcePlan: starter
+      container:
+        image: docker.io/python:latest
+        command:
+          - python3
+          - '-c'
+        args:
+          - |
+            print("Hello from SAP AI Core - step 1")
+    - name: fareweller
+      metadata:
+        labels:
+          ai.sap.com/resourcePlan: starter
+      container:
+        image: docker.io/python:latest
+        command:
+          - python3
+          - '-c'
+        args:
+          - |
+            print("Goodbye from SAP AI Core - step 2") 
+
