@@ -1,0 +1,94 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: first-pipeline-multi_rrp_io
+  annotations:
+    scenarios.ai.sap.com/description: "Multi-step pipeline with parameters"
+    scenarios.ai.sap.com/name: "Tutorial"
+    executables.ai.sap.com/description: "Two-step pipeline with participant name and company"
+    executables.ai.sap.com/name: "Hello Pipeline Multi-Step Enhanced"
+  labels:
+    scenarios.ai.sap.com/id: "learning"
+    ai.sap.com/version: "2.0"
+spec:
+  entrypoint: mypipeline
+  arguments:
+    parameters:
+      - name: participant_name
+        value: "SAP AI Core User"
+      - name: company
+        value: "ZaranTech"
+  templates:
+    - name: mypipeline
+      steps:
+        - - name: greet
+            template: greeter
+            arguments:
+              parameters:
+                - name: participant_name
+                  value: "{{workflow.parameters.participant_name}}"
+                - name: company
+                  value: "{{workflow.parameters.company}}"
+        - - name: farewell
+            template: fareweller
+            arguments:
+              parameters:
+                - name: participant_name
+                  value: "{{workflow.parameters.participant_name}}"
+    - name: greeter
+      metadata:
+        labels:
+          ai.sap.com/resourcePlan: starter
+      inputs:
+        parameters:
+          - name: participant_name
+          - name: company
+      container:
+        image: docker.io/python:latest
+        command:
+          - python3
+          - '-c'
+        args:
+          - |
+            import datetime
+            import platform
+            name    = "{{inputs.parameters.participant_name}}"
+            company = "{{inputs.parameters.company}}"
+            now     = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
+            py      = platform.python_version()
+            print("=" * 55)
+            print(f"  STEP 1 - GREETING")
+            print(f"  Hello {name} from {company}!")
+            print(f"  Welcome to SAP AI Core")
+            print(f"  Time         : {now}")
+            print(f"  Python       : {py}")
+            print(f"  Resource plan: starter")
+            print("=" * 55)
+    - name: fareweller
+      metadata:
+        labels:
+          ai.sap.com/resourcePlan: starter
+      inputs:
+        parameters:
+          - name: participant_name
+      container:
+        image: docker.io/python:latest
+        command:
+          - python3
+          - '-c'
+        args:
+          - |
+            import datetime
+            import platform
+            name = "{{inputs.parameters.participant_name}}"
+            now  = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
+            node = platform.node()
+            print("=" * 55)
+            print(f"  STEP 2 - FAREWELL")
+            print(f"  Goodbye {name}!")
+            print(f"  SAP AI Core pipeline complete")
+            print(f"  Completed at : {now}")
+            print(f"  Pod hostname : {node}")
+            print("=" * 55)
+            print("Multi-Step Pipeline v2.0 - DONE")
+
