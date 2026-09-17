@@ -6,7 +6,7 @@ metadata:
     scenarios.ai.sap.com/description: "Multi-step pipeline with parameters"
     scenarios.ai.sap.com/name: "Tutorial"
     executables.ai.sap.com/description: "Two-step pipeline with participant name and company"
-    executables.ai.sap.com/name: "Hello Pipeline Multi-Step Enhanced"
+    executables.ai.sap.com/name: "Hello Pipeline Multi-Step Enhanced_rrp"
   labels:
     scenarios.ai.sap.com/id: "learning"
     ai.sap.com/version: "2.0"
